@@ -24,7 +24,7 @@ namespace SoccerApplication
 
                 try
                 {
-                    DatabaseInitialisation.InitializeDatabase(services);
+                    
                 }
                 catch (Exception ex)
                 {

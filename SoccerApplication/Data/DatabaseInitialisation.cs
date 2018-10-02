@@ -10,26 +10,80 @@ namespace SoccerApplication.Data
 {
     public class DatabaseInitialisation
     {
-        public static void InitializeDatabase(IServiceProvider services)
+        public static void InitializeDatabase(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
-            SeedData(services);
+            SeedRoles(roleManager);
+            SeedUsers(userManager);
         }
 
-        private async static void SeedData(IServiceProvider services)
+        public static void SeedRoles(RoleManager<ApplicationRole> roleManager)
         {
-            var context = services.GetRequiredService<ApplicationDbContext>();
-            var usermanager = services.GetRequiredService<UserManager<ApplicationUser>>();
-            var rolemanager = services.GetRequiredService<RoleManager<IdentityRole>>();
-
-
-            if (true)
+            if (!roleManager.RoleExistsAsync("NormalUser").Result)
             {
-                await rolemanager.CreateAsync(new IdentityRole { Name = "teammanager" });
-                var user = new ApplicationUser { Email = "admin@email.com" };
-                IdentityResult result = await usermanager.CreateAsync(user, "Pass123$");
+                ApplicationRole role = new ApplicationRole
+                {
+                    Name = "NormalUser",
+                    //Description = "Perform normal operations."
+                };
+                IdentityResult roleResult = roleManager.
+                CreateAsync(role).Result;
+            }
+
+            if (!roleManager.RoleExistsAsync("TeamManager").Result)
+            {
+                ApplicationRole role = new ApplicationRole
+                {
+                    Name = "TeamManager",
+                    //Description = "Manage players"
+                };
+                IdentityResult roleResult = roleManager.
+                CreateAsync(role).Result;
+            }
+
+
+            if (!roleManager.RoleExistsAsync("Administrator").Result)
+            {
+                ApplicationRole role = new ApplicationRole
+                {
+                    Name = "Administrator",
+                    //Description = "Perform all the operations."
+                };
+                IdentityResult roleResult = roleManager.
+                CreateAsync(role).Result;
+            }
+        }
+        public static void SeedUsers(UserManager<ApplicationUser> userManager)
+        {
+            if (userManager.FindByNameAsync("teammanager1").Result == null)
+            {
+                ApplicationUser user = new ApplicationUser();
+                user.UserName = "teammanager1";
+                user.Email = "admin@email.com";
+
+                IdentityResult result = userManager.CreateAsync
+                (user, "Pass123$").Result;
+
                 if (result.Succeeded)
                 {
-                    await usermanager.AddToRoleAsync(user, "teammanager");
+                    userManager.AddToRoleAsync(user,
+                                        "TeamManager").Wait();
+                }
+            }
+
+
+            if (userManager.FindByNameAsync("teammanager2").Result == null)
+            {
+                ApplicationUser user = new ApplicationUser();
+                user.UserName = "teammanager2";
+                user.Email = "admin1@email.com";
+
+                IdentityResult result = userManager.CreateAsync
+                (user, "Pass123$").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user,
+                                        "TeamManager").Wait();
                 }
             }
         }
