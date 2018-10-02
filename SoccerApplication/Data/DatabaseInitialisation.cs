@@ -23,7 +23,7 @@ namespace SoccerApplication.Data
                 ApplicationRole role = new ApplicationRole
                 {
                     Name = "NormalUser",
-                    //Description = "Perform normal operations."
+                    Description = "Perform normal operations."
                 };
                 IdentityResult roleResult = roleManager.
                 CreateAsync(role).Result;
@@ -34,7 +34,7 @@ namespace SoccerApplication.Data
                 ApplicationRole role = new ApplicationRole
                 {
                     Name = "TeamManager",
-                    //Description = "Manage players"
+                    Description = "Manage players"
                 };
                 IdentityResult roleResult = roleManager.
                 CreateAsync(role).Result;
@@ -46,7 +46,7 @@ namespace SoccerApplication.Data
                 ApplicationRole role = new ApplicationRole
                 {
                     Name = "Administrator",
-                    //Description = "Perform all the operations."
+                    Description = "Perform all the operations."
                 };
                 IdentityResult roleResult = roleManager.
                 CreateAsync(role).Result;
@@ -54,10 +54,10 @@ namespace SoccerApplication.Data
         }
         public static void SeedUsers(UserManager<ApplicationUser> userManager)
         {
-            if (userManager.FindByNameAsync("teammanager1").Result == null)
+            if (userManager.FindByNameAsync("admin@email.com").Result == null)
             {
                 ApplicationUser user = new ApplicationUser();
-                user.UserName = "teammanager1";
+                user.UserName = "admin@email.com";
                 user.Email = "admin@email.com";
 
                 IdentityResult result = userManager.CreateAsync
@@ -71,10 +71,10 @@ namespace SoccerApplication.Data
             }
 
 
-            if (userManager.FindByNameAsync("teammanager2").Result == null)
+            if (userManager.FindByNameAsync("admin1@email.com").Result == null)
             {
                 ApplicationUser user = new ApplicationUser();
-                user.UserName = "teammanager2";
+                user.UserName = "admin1@email.com";
                 user.Email = "admin1@email.com";
 
                 IdentityResult result = userManager.CreateAsync

@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using SoccerApplication.Data;
 using System;
 
-namespace SoccerApplication.Data.Migrations
+namespace SoccerApplication.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181002085644_add application Role")]
-    partial class addapplicationRole
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,6 +111,8 @@ namespace SoccerApplication.Data.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256);

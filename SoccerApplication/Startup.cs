@@ -57,8 +57,6 @@ namespace SoccerApplication
 
             app.UseAuthentication();
 
-            DatabaseInitialisation.InitializeDatabase(userManager, roleManager);
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -5,13 +5,6 @@
     <UserSecretsId>aspnet-SoccerApplication-96866AC9-8A3E-487F-884F-923B9A29D47E</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Data\Migrations\20180914113319_Teammanager.cs" />
-    <Compile Remove="Data\Migrations\20180914113319_Teammanager.Designer.cs" />
-    <Compile Remove="Data\Migrations\20180914113652_admin.cs" />
-    <Compile Remove="Data\Migrations\20180914113652_admin.Designer.cs" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
